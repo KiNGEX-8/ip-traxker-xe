@@ -1,0 +1,29 @@
+print("IP Tracker")
+
+import socket
+import requests
+import json
+
+# Get the IP address
+hostname = input("Enter website URL or IP address: ")
+ip_address = socket.gethostbyname(hostname)
+print(f"IP address: {ip_address}")
+
+# Use the IP address to get the location
+url = f"http://ipapi.com/{ip_address}/json"
+response = requests.get(url)
+
+# Parse the JSON response
+data = json.loads(response.content)
+country = data['country_name']
+region = data['region_name']
+city = data['city']
+latitude = data['latitude']
+longitude = data['longitude']
+
+# Display the results
+print(f"Country: {country}")
+print(f"Region: {region}")
+print(f"City: {city}")
+print(f"Latitude: {latitude}")
+print(f"Longitude: {longitude}")
